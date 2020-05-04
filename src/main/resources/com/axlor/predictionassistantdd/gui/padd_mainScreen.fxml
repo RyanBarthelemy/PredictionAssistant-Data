@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:controller="com.axlor.predictionassistantdd.gui.MainScreenController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <SplitPane dividerPositions="0.4675834970530452" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="511.0" prefWidth="632.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                    <children>
+                        <Label id="titleLabel" fx:id="titleLabel" alignment="CENTER" layoutX="154.0" layoutY="14.0" text="Prediction Assistant Data" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                            <font>
+                                <Font name="System Bold" size="32.0" />
+                            </font>
+                        </Label>
+                        <HBox layoutX="40.0" layoutY="89.0" prefHeight="79.0" prefWidth="515.0">
+                            <children>
+                                <Label id="nextCheckLabel" fx:id="nextCheckLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="89.0" prefHeight="79.0" prefWidth="184.0" text="Next Check :">
+                                    <font>
+                                        <Font size="26.0" />
+                                    </font>
+                                </Label>
+                                <Label id="timeLeftCountdownLabel" fx:id="timeLeftCountdownLabel" prefHeight="79.0" prefWidth="173.0" text="######">
+                                    <font>
+                                        <Font size="26.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </Label>
+                                <Button id="pauseButton" fx:id="pauseButton" alignment="CENTER" contentDisplay="CENTER" layoutX="413.0" layoutY="103.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pauseButtonClicked" prefHeight="55.0" prefWidth="129.0" text="Pause">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="40.0" top="10.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="771.0">
+                    <children>
+                        <ListView id="logListView" fx:id="logListView" prefHeight="144.0" prefWidth="662.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>
