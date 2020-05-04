@@ -1,6 +1,9 @@
 # PredictionAssistant-Data
 Download and Persist PredictIt API data.
 
+The easiest way to use this application is to go to: https://www.dropbox.com/s/akmhna96xzmup8p/Prediction%20Assistant%20Data.zip?dl=0
+Download and extract to wherever you want. Make sure the Jar and application.properties file stay together, that's it! You will need a MySQL instance running, but we will cover that below.
+
 This application uses Spring Boot and JavaFX to download market data from the PredictIt API (https://www.predictit.org/api/marketdata/all/) and save it to a MySQL database.
 
 PredictIt's API only gives a current snapshot of all market data, we cannot easily collect historical data for any given market and so we cannot easily analyze it. This program is part of a collection of applications that seeks to make it simple and easy for anyone to collect and gain access to historical data for any PredictIt market.
