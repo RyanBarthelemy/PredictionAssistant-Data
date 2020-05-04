@@ -15,7 +15,7 @@ spring.datasource.username=axlor_dev
 spring.datasource.password=axlordevpass
 
 
-The datasource.url contains the database location, port, and pre-generated schema name, not tables need be created before running. The application will generate them. 
+The datasource.url contains the database location, port, and pre-generated schema name. No tables need be created before running. The application will generate them. 
 
 The datasource.username must be a user that is authorized to create tables and add data to the database etc. This application only creates tables once (when it needs to), otherwise it will only be adding data to the database, it does not remove old or outdated data in any way. However, it is important to note that tables could be dropped by the applicaiton if the program is ran with an application.properties file containing the line:
 
