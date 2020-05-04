@@ -43,7 +43,7 @@ public class DataService {
      * The amount of time in milliseconds to wait between each request to PredictIt for data. Set in application.properties key 'my.waitTime'
      * Default is 60 seconds
      */
-    @Value("${my.waitTime:60000}")
+    @Value("${my.waitTime:40000}")
     long waitTime;
 
     private boolean paused = false;
@@ -77,6 +77,7 @@ public class DataService {
         boolean pauseFlagSet = false;
 
         while (true) {
+            System.out.println("paused status = " + paused); //why is this solving the pause bug?? Need to investigate more...
             if (System.currentTimeMillis() - startTime > waitTime) {  //wait time has elapsed
                 if (!paused) {
                     pauseFlagSet = false;
@@ -142,6 +143,7 @@ public class DataService {
 
     public void swapPauseStatus() {
         paused = !paused;
+        mainScreenController.addMessage("Pause Button clicked: Pause status = " + paused);
     }
 
     private void addMessage(String message){

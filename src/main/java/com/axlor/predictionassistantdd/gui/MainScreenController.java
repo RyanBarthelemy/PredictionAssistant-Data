@@ -5,6 +5,7 @@ package com.axlor.predictionassistantdd.gui;
  */
 
 import com.axlor.predictionassistantdd.service.DataService;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,7 +47,7 @@ public class MainScreenController {
 
     @FXML
     void pauseButtonClicked(ActionEvent event) {
-        dataService.swapPauseStatus();
+        Platform.runLater(() -> dataService.swapPauseStatus());
     }
 
     @PostConstruct
