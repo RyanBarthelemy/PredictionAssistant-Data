@@ -2,7 +2,6 @@ package com.axlor.predictionassistantdd;
 
 import javafx.application.Application;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 public class PredictionAssistantDataDownloaderApplication {

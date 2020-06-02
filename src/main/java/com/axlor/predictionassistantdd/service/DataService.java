@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.logging.Logger;
 
 //todo: make sout statements Logger statements.
@@ -38,6 +39,9 @@ public class DataService {
 
     @Autowired
     MainScreenController mainScreenController;
+
+    @Value("${my.hoursToKeepSnapshot:24}")
+    long hoursToKeepSnapshot;
 
     /**
      * The amount of time in milliseconds to wait between each request to PredictIt for data. Set in application.properties key 'my.waitTime'
@@ -70,6 +74,33 @@ public class DataService {
                 };
         Thread newThread = new Thread(runnable);
         newThread.start();
+
+        Runnable runnableDelete =
+                () -> {
+                    try {
+                        runDeleteLoop(mainScreenController);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                };
+        Thread deleteThread = new Thread(runnableDelete);
+        deleteThread.start();
+
+    }
+
+    private void runDeleteLoop(MainScreenController mainScreenController) throws InterruptedException {
+        long timeToKeepSnapshots = hoursToKeepSnapshot*60*60*1000; //convert to milli
+        while(true){
+            List<Long> timestamps = snapshotRepository.getTimestamps();
+            for (Long timestamp: timestamps){
+                if(System.currentTimeMillis()-timestamp > timeToKeepSnapshots){
+                    Snapshot snapshot = snapshotRepository.findSnapshotByTimestamp(timestamp);
+                    mainScreenController.addMessage("Deleting Snapshot[" + snapshot.getHashId() + "]");
+                    snapshotRepository.delete(snapshot);
+                }
+            }
+            Thread.sleep(1000*60*60);//check once per hour to delete things
+        }
     }
 
     private void runDownloadAndSaveLoop(MainScreenController mainScreenController) throws InterruptedException {
@@ -77,7 +108,7 @@ public class DataService {
         boolean pauseFlagSet = false;
 
         while (true) {
-            System.out.println("paused status = " + paused); //why is this solving the pause bug?? Need to investigate more...
+            System.out.println("paused status = " + paused); //why is this solving the pause bug?? Need to investigate more... // race condition?
             if (System.currentTimeMillis() - startTime > waitTime) {  //wait time has elapsed
                 if (!paused) {
                     pauseFlagSet = false;
