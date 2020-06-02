@@ -78,7 +78,7 @@ public class DataService {
         Runnable runnableDelete =
                 () -> {
                     try {
-                        runDeleteLoop(mainScreenController);
+                        runDeleteLoop();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -88,14 +88,14 @@ public class DataService {
 
     }
 
-    private void runDeleteLoop(MainScreenController mainScreenController) throws InterruptedException {
+    private void runDeleteLoop() throws InterruptedException {
         long timeToKeepSnapshots = hoursToKeepSnapshot*60*60*1000; //convert to milli
         while(true){
             List<Long> timestamps = snapshotRepository.getTimestamps();
             for (Long timestamp: timestamps){
                 if(System.currentTimeMillis()-timestamp > timeToKeepSnapshots){
                     Snapshot snapshot = snapshotRepository.findSnapshotByTimestamp(timestamp);
-                    mainScreenController.addMessage("Deleting Snapshot[" + snapshot.getHashId() + "]");
+                    addMessage("Deleting Snapshot[" + snapshot.getHashId() + "]");
                     snapshotRepository.delete(snapshot);
                 }
             }
